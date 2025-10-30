@@ -1,0 +1,12 @@
+{
+  "editor.formatOnSave": true,
+  "emeraldwalk.runonsave": {
+    "autoClearConsole": false,
+    "commands": [
+      {
+        "match": "src\\\\flows\\\\.*\\.js$",
+        "cmd": "node ${workspaceFolder}\\scripts\\upload-with-notify.js --env=dev ${file}"
+      }
+    ]
+  }
+}

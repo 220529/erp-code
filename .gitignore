@@ -1,0 +1,17 @@
+node_modules/
+.DS_Store
+*.log
+.env
+.env.local
+.diff-tracking.json
+
+# 配置文件（包含 API Key 敏感信息）
+config/dev.json
+config/prod.json
+
+# 测试文件（不提交）
+src/flows/测试*.js
+src/flows/test*.js
+src/flows/**/测试*.js
+src/flows/**/test*.js
+

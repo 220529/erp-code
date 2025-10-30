@@ -1,0 +1,24 @@
+{
+  "name": "erp-code",
+  "version": "1.0.0",
+  "description": "ERP 业务代码仓库 - 存储和管理动态业务逻辑",
+  "main": "index.js",
+  "scripts": {
+    "upload:dev": "node scripts/upload-with-notify.js --env=dev",
+    "upload:prod": "node scripts/upload-with-notify.js --env=prod",
+    "format": "prettier --write \"src/**/*.js\" \"scripts/**/*.js\""
+  },
+  "keywords": [
+    "erp",
+    "business-logic",
+    "dynamic-code"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-notifier": "^10.0.1"
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2"
+  }
+}
