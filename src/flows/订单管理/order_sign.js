@@ -2,7 +2,7 @@
  * @flowKey ux5vzv7qq5gw5z38
  * @flowName order_sign
  * @description 订单签约
- * @updateTime 2025-10-31 11:38:23
+ * @updateTime 2025-12-16 16:46:06
  */
 
 // 解构上下文
@@ -23,8 +23,8 @@ if (!order) {
 }
 
 // 检查订单状态
-if (order.status !== 'draft') {
-  throw new Error(`订单当前状态为${order.status}，只有草稿状态的订单才能签约`);
+if (order.status !== 'pending') {
+  throw new Error(`订单当前状态为${order.status}，只有待签约状态的订单才能签约`);
 }
 
 const queryRunner = dataSource.createQueryRunner();
@@ -38,12 +38,14 @@ try {
     signedAt: new Date(),
   });
 
-    // 如果有定金金额，创建定金收款记录
-    if (params.depositAmount && params.depositAmount > 0) {
-      // 生成收款单号（SK + 日期 + 随机数）
-      const dateStr = dayjs().format('YYYYMMDD');
-      const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
-      const paymentNo = `SK${dateStr}${random}`;
+  // 如果有定金金额，创建定金收款记录
+  if (params.depositAmount && params.depositAmount > 0) {
+    // 生成收款单号（SK + 日期 + 随机数）
+    const dateStr = dayjs().format('YYYYMMDD');
+    const random = Math.floor(Math.random() * 10000)
+      .toString()
+      .padStart(4, '0');
+    const paymentNo = `SK${dateStr}${random}`;
 
     const payment = queryRunner.manager.create('Payment', {
       paymentNo,

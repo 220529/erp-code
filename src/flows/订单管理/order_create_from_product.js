@@ -2,7 +2,7 @@
  * @flowKey lid8klr7nkv9fic1
  * @flowName order_create_from_product
  * @description 从产品套餐创建订单，并自动复制套餐物料到订单明细
- * @updateTime 2025-10-31 11:39:42
+ * @updateTime 2025-12-16 16:45:53
  */
 
 // 解构上下文
@@ -49,7 +49,9 @@ if (!customer) {
 
 // 生成订单编号（DD + 日期 + 随机数）
 const dateStr = dayjs().format('YYYYMMDD');
-const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+const random = Math.floor(Math.random() * 10000)
+  .toString()
+  .padStart(4, '0');
 const orderNo = `DD${dateStr}${random}`;
 
 // 使用事务创建订单
@@ -65,7 +67,7 @@ try {
     totalAmount: product.salePrice,
     costAmount: product.costPrice,
     paidAmount: 0,
-    status: 'draft',
+    status: 'pending',
     remark: params.remark || '',
   });
   await queryRunner.manager.save(order);
